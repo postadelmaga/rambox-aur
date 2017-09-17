@@ -10,7 +10,7 @@ depends=(electron)
 makedepends=(desktop-file-utils asar ruby npm sencha-cmd-6)
 url='http://rambox.pro/'
 license=('GPL3')
-source=("https://github.com/postadelmaga/$pkgname/archive/$pkgver.tar.gz"
+source=("${pkgname%-git}::git+http://github.com/postadelmaga/$pkgname.git"
         "https://github.com/saenzramiro/$pkgname/releases/download/$_relver/Rambox-$_relver-x64.tar.gz"
         "context-menu.patch::https://github.com/flying-sheep/$pkgname/commit/2109de0825058a3ee9c0a09a603520b8e7c09744.diff"
         "$pkgname.desktop" "$pkgname.js")
@@ -25,7 +25,7 @@ build() {
 	# retrieve env.js
 	cd "$srcdir"
 	tar xOf "Rambox-$_relver-x64.tar.gz" "Rambox-$_relver/resources/app.asar" >app.asar
-	cd "$pkgname-$pkgver"
+	cd "$pkgname"
 	asar ef ../app.asar env.js
 	
 	# context menu patch
